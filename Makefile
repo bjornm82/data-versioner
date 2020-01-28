@@ -16,4 +16,4 @@ push:
 
 .PHONY: run
 run:
-	docker run -rm -it ${GIT_ORG_NAME}/${GIT_PROJECT_REPO}:${BRANCH}-${COMMIT} -a {artifact} -n {name}
+	docker run -v $(PWD)/example/data:/tmp/data --name data-versioner --rm -it ${GIT_ORG_NAME}/${GIT_PROJECT_REPO}:${BRANCH}-${COMMIT}
