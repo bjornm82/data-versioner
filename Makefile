@@ -6,6 +6,14 @@ VERSION ?= $(shell git describe --tags --always)
 COMMIT ?= $(shell git rev-parse HEAD)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 
-.phony: build
+.PHONY: build
 build:
-	docker build -t ${GIT_ORG_NAME}/${GIT_PROJECT_REPO}:${COMMIT}-${BRANCH} .
+	docker build -t ${GIT_ORG_NAME}/${GIT_PROJECT_REPO}:${BRANCH}-${COMMIT} .
+
+.PHONY: push
+push:
+	docker push ${GIT_ORG_NAME}/${GIT_PROJECT_REPO}:${BRANCH}-${COMMIT}
+
+.PHONY: run
+run:
+	docker run -rm -it ${GIT_ORG_NAME}/${GIT_PROJECT_REPO}:${BRANCH}-${COMMIT} -a {artifact} -n {name}
