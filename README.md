@@ -16,6 +16,50 @@ The model output will be tracked in order to have the ability to validate and de
 the outcome of a model in combination with the code and data so the will follow
 the next notion `Code + Data = Model`, whereas the code is always leading.
 
+### The goal
+As this project fully depends on the notion of event sourcing system of Git and
+external storage of S3 (or MinIO). Abilities and under the hood.
+
+**Write**
+
+Metadata will be stored in the `data-version-repo` with extended the `branch` and
+`git commit hash --short` of the repository the data is being produced e.g.
+
+Structure of `data-version-repo`:
+```
+.
+├── README.md
+└── rtlnl
+    ├── project_a
+    │   ├── master-47b8305
+    │   │   ├── Dvcfile
+    │   │   ├── preprocessed_data.xml.dvc
+    │   │   └── model.h5.dvc
+    │   └── master-8c9b659
+    │       ├── Dvcfile
+    │       ├── data.xml.dvc
+    │       └── model.h5.dvc
+    └── project_b
+        └── master-47b8305
+            ├── Dvcfile
+            ├── preprocessed_data.xml.dvc
+            └── model.h5.dvc
+```
+Structure of data on S3:
+```
+s3-bucket/rtlnl/project_a/master/47b8305/preprocessed_data.xml
+s3-bucket/rtlnl/project_a/master/47b8305/model.h5
+s3-bucket/rtlnl/project_a/master/8c9b659/data.xml
+s3-bucket/rtlnl/project_a/master/8c9b659/model.h5
+```
+
+* Input data mounted to /tmp folder
+* Arguments provided for the repository which is correlated project
+* git rev-parse to obtain the complete git commit hash from short hash
+* Check if the repo directory
+
+**Read**
+
 ## Getting started
 
 ### Concept
@@ -59,7 +103,6 @@ based on the code of the model written (e.g. model-a is the repository).
     └── model
          └── model.xml.dvc
 ```
-
 
 2. The data and model
 Both data and the model are treated the same. Each step of the pipeline you could

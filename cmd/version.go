@@ -19,11 +19,17 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		path, err := exec.LookPath("git")
+		gitPath, err := exec.LookPath("git")
 		if err != nil {
 			log.Fatal("installing git is in your future")
 		}
-		fmt.Printf("git is available at %s\n", path)
+		fmt.Printf("git is available at %s\n", gitPath)
+
+		dvcPath, err := exec.LookPath("dvc")
+		if err != nil {
+			log.Fatal("installing dvc is in your future")
+		}
+		fmt.Printf("dvc is available at %s\n", dvcPath)
 	},
 }
 
