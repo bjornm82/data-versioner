@@ -35,22 +35,24 @@ Structure of `data-version-repo`:
     │   │   ├── Dvcfile
     │   │   ├── preprocessed_data.xml.dvc
     │   │   └── model.h5.dvc
-    │   └── master-8c9b659
+    │   └── develop-8c9b659
     │       ├── Dvcfile
     │       ├── data.xml.dvc
     │       └── model.h5.dvc
     └── project_b
-        └── master-47b8305
+        └── master-554c276
             ├── Dvcfile
             ├── preprocessed_data.xml.dvc
             └── model.h5.dvc
 ```
 Structure of data on S3:
 ```
-s3-bucket/rtlnl/project_a/master/47b8305/preprocessed_data.xml
-s3-bucket/rtlnl/project_a/master/47b8305/model.h5
-s3-bucket/rtlnl/project_a/master/8c9b659/data.xml
-s3-bucket/rtlnl/project_a/master/8c9b659/model.h5
+{s3-bucket}/rtlnl/project_a/master/47b8305/preprocessed_data.xml
+{s3-bucket}/rtlnl/project_a/master/47b8305/model.h5
+{s3-bucket}/rtlnl/project_a/develop/8c9b659/data.xml
+{s3-bucket}/rtlnl/project_a/develop/8c9b659/model.h5
+{s3-bucket}/rtlnl/project_b/master/554c276/preprocessed_data.xml
+{s3-bucket}/rtlnl/project_b/master/554c276/model.h5
 ```
 
 * Input data mounted to /tmp folder
